@@ -1,22 +1,6 @@
 import sys
-from common import readFloatArrayFromLine, stripLine
+from common import readFloatArrayFromLine, stripLine, ACGThist, getLogProb
 import math
-
-def ACGThist(dna):
-    hist = {'A':0, 'C':0, 'G':0, 'T':0}
-    for s in dna:
-        hist[s] += 1
-    return hist
-
-def getLogProb(gcProb):
-    logProb = {}
-    acProb = math.log10((1 - gcProb) / 2)
-    gcProb = math.log10(gcProb / 2)
-    logProb['A'] = acProb
-    logProb['T'] = acProb
-    logProb['C'] = gcProb
-    logProb['G'] = gcProb
-    return logProb
 
 def randomMatch(gcProb, dnaHist):
     logProb = getLogProb(gcProb)

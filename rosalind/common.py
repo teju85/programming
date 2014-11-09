@@ -1,5 +1,6 @@
 import string
 import urllib2
+import math
 
 def stripLine(line):
     line = line.strip('\n')
@@ -449,3 +450,19 @@ def deBruijn(dnas):
         _addEdge(adj, revComp(d))
     adj = sorted(adj)
     return adj
+
+def ACGThist(dna):
+    hist = {'A':0, 'C':0, 'G':0, 'T':0}
+    for s in dna:
+        hist[s] += 1
+    return hist
+
+def getLogProb(gcProb):
+    logProb = {}
+    atProb = math.log10((1 - gcProb) / 2)
+    gcProb = math.log10(gcProb / 2)
+    logProb['A'] = atProb
+    logProb['T'] = atProb
+    logProb['C'] = gcProb
+    logProb['G'] = gcProb
+    return logProb
