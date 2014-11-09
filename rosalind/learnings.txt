@@ -1,0 +1,390 @@
+split:
+  division of collection of taxa into 2 disjoint sets
+
+de Bruijn graph:
+  graph used for representing overlaps in a collection of k-mers
+
+read coverage:
+  in fragment assembly, the avg number of times each nucleotide from the
+  genome appears in the reads
+
+wobble base pair:
+  bonding of U to G in RNA and more rarely T to G in DNA
+
+haploid:
+  cell that possesses only a single copy of each chromosome
+
+diploid:
+  cell that possesses 2 similar copies of each chromosome
+
+alternative splicing:
+  process by which exons are chained in different ways thus translated into
+  different protein isoforms
+  common type of this is exon skipping
+
+quality of base call:
+  certainty with which a read is identified by sequencing instruments
+  measured using Phred quality scale.
+  Q = -10 * log10(P)
+  P = probability of base call is incorrect
+
+mass spectrometry:
+  technique to identify molecules by splitting them into pieces and
+  analyzing chemical properties of these small pieces
+
+mass spectrum:
+  collection of masses of chemical particles in a sample
+
+N-terminus:
+  left end of the cut protein
+  ions in it are called b-ions
+
+C-terminus:
+  right end of the cut protein
+  ions in it are called y-ions
+
+RNA folding:
+  base pairing interactions of an RNA molecule cause it to twist around on itself
+
+hairpin loop (stem loop):
+  structure formed by the base pairing of 2 nearby complementary intervals on
+  the RNA strand
+
+bonding graph:
+  graph for modeling base pairing in RNA secondary structure
+
+transitions:
+  mutation between purines (A<->G) and pyrimidines (C<->T)
+
+transversions:
+  mutation across purines and pyrimidines
+
+silent substitution:
+  substitution in which the organism's protein makeup remains unaffected
+
+promoters:
+  regions of DNA that initiate transcription
+
+reads:
+  substring of genome used for fragment assembly
+
+fragment assenbly:
+  algorithmic reconstruction of contiguous chromosomes from short dna fragments
+
+p-distance:
+  proportion of symbols mismatching between 2 strings
+
+SNP:
+  Single Nucleotide Polymorphism
+  used as basis for genetic testing
+  single nucleotide location of the genome at which closely related
+  organisms may differ
+
+character:
+  genetic or physical feature
+
+genotyping:
+  comparing genomic markers from different populations to infer ancestors
+
+phylogeny:
+  tree modeling the evolutionary scenario deriving a collection of
+  taxa from their proposed ancestors
+
+taxon:
+  collection of organisms for purpose of phylogenetic analysis
+
+RNA polymerase:
+  RNAP. enzyme transcribing double-stranded molecule of dna in
+  the nucleus into a strand of RNA
+
+precursor mRNA (pre-mRNA):
+  raw result of dna transcription
+  gets spliced to form a mature strand of mRNA for protein translation
+  uses one of the two DNA strands as template strand
+  chopped into introns and exons
+
+coding strand:
+  the strand of DNA which gets copied/transcribed into RNA
+
+intron:
+  gene segment not used for protein translation
+
+exon:
+  gene segment translated to protein
+
+splicing:
+  process by which coding regions are excised into mRNA for protein translation
+
+spliceosome:
+  macromolecule of RNA and proteins that facilitates RNA splicing
+
+bacteriophage:
+  virus that targets bacteria
+
+restriction enzymes:
+  enzyme that binds to and cuts dna in order to disrupt a phage's activity
+  it is a homodimer
+  bacteria prevents its own dna from being cut through dna methylation
+
+dna methylation:
+  chemical process that changes the activity levels of dna
+
+homodimer:
+  molecule comprising two identical substructures
+
+reverse palidrome:
+  dna string that is equal to its reverse complement
+
+genome rearrangements:
+  large-scale mutation affecting entire intervals of nucleic acid
+
+synteny blocks:
+  region of DNA condensed into single unit for genome comparison
+
+domain:
+  Structural and functional unit of the protein
+  interval of amino acids that can evolve and function independently
+
+chimeric protein:
+  protein artificially constructed from several known domains
+
+protein families:
+  group of homologous proteins
+
+motif:
+  component of a domain essential for its function
+  appear without much change in different species
+
+Fibonacci numbers:
+  F(n) = F(n-1) + F(n-2)
+  F(0) = 0
+  F(1) = 1
+  F(n) ~= 2^(0.694*n)
+  Naive recursion is exponential in time!
+  Instead should be using the iterative for-loops with memoization
+
+Master Theorem:
+  T(n) = a * T(n/b) + O(n^d)
+  Calculating running times for divide-n-conquer algorithms
+  T(n) = O(n^d)            if d > log-b(a)
+  T(n) = O(n^d * log(n))   if d = log-b(a)
+  T(n) = O(n^log-b(a))     if d < log-b(a)
+
+profile matrix:
+  4xn matrix with each row depicting the occurancy of each nucleotide
+
+consensus string:
+  collection of equal-length strings by taking the most common
+  symbol at each position
+
+peptide bond:
+  two amino acids binding together
+  releases a molecule of water
+
+residue:
+  molecule that has lost a molecule of water as the result of
+  a chemical reaction, used specifically to describe an amino
+  acid that is part of a polypeptide chain
+  evey amino acid in a protein are residues except the left and
+  rightmost ones
+
+monoisotopic mass:
+  sum of masses of common isotopes of the atoms in a molecule
+
+motif:
+  nucleotide or amino acid pattern of biological significance
+
+repeats:
+  interval of DNA in the genome that occurs often, possibly with minor changes
+
+genetic code:
+  exact specs for translating nucleic acid codons into amino acids
+
+codon:
+  triplet of contiguous nucleotides
+
+start codon:
+  AUG nucleotides
+  codes for methionine amino acid
+  indicates the beginning of translation into protein
+
+stop codons:
+  UAA,UAG,UGA nucleotides
+  indicates the end of translation
+
+central dogma of molecular biology:
+  protein is always transcribed from RNA which is from DNA
+  this does not always hold good?!
+
+eukaryotes:
+  most complex domain of life
+  includes all multicellular organisms
+
+organelle:
+  structure in the cell that serves as the central hub
+  for some particular group of cellular functions
+
+ribosome:
+  organelle that assembles peptides from mRNA
+
+tRNA:
+  transfer RNA
+  helper molecule used by ribosomes for
+  translating codons into amino acids
+  contains 3 RNA nucleotides on one end and an amino acid at the other
+
+anticodon:
+  complementay nucleotides wrt the reference codon
+
+RNA codon table:
+  translation of individual RNA codons into amino acids
+
+DNA codon table:
+  translation of individual DNA codons into amino acids
+
+junk DNA:
+  serves no practical purpose to the cell
+
+reading frames:
+  one of the 3 possible ways to read a given DNA strand
+  depends on the starting position
+
+ORF:
+  Open Reading Frame
+  DNA/RNA sequence potentially able to encode the protein
+  starts with start-codon and ends by stop-codon
+
+mutation:
+  mistake that occurs during creation or copying of nucleic acid
+
+point-mutation:
+  mutation that affects a single nucleotide of nucleic acid
+
+homologous genomes:
+  descending from the same ancestor
+
+parsimony:
+  nature tends to take the shortest path in evolution
+  somewhat related to occam's razor
+
+GC-content:
+  percentage of cytosine and guanine bases in a nucleic acid strand
+
+FASTA format:
+  text format for naming genetic strings in a database
+
+factors:
+  Mendelian unit of heredity (ie. gene) (or trait)
+
+alleles:
+  One of 2 forms of Mendelian factor
+
+Law of independent assortment (mendel's second law):
+  Traits are inherited independently of each other
+
+Law of segregation (mendel's first law):
+  Every gene has 2 alleles, one of which derives from each parent
+
+homozygous:
+  individual with same alleles
+
+heterozygous:
+  individual with different alleles
+
+dominant allele:
+  supercedes the recessive allele
+  determines the organism's phenotype
+
+genotype:
+  organism's precise genetic makeup (AA, Aa, aA, aa)
+
+phenotype:
+  organism's physical manifestation of its underlying traits
+  (A = AA,Aa,aA, a=aa)
+
+Punnett square:
+  square to represent different allele possibilities of offspring
+  given its parents alleles
+
+base pair:
+  Combination of 2 bonded complementary bases
+
+chromatin:
+  Dense collection of nucleic acids and proteins found in the nucleus
+
+k-mer:
+  Length 'k' substring of a genetic string, particularly a DNA string
+
+Simple Graph:
+  Undirected graph, has no loops, no more than 1 edge between any 2 vertices
+
+Sequence (Genetic String):
+  DNA, RNA or amino acid string (protein string)
+
+protein string:
+  All letters in English except B,J,O,U,X,Z
+
+Polypeptide:
+  Long chain of amino acids
+
+Proteins:
+  Function unit of a cell
+  Made up of folded polypeptides, broken down into peptides or polymers of amino acids
+  Nucleic acids <=> polymers of nucleotides
+  Proteins <=> polymers of amino acids
+  Just as primary structure of nucleic acids = order of its nucleotides
+  primary structure of proteins = order of its amino acids
+  Some proteins are composed of several subchains => polypeptides
+  Some proteins only have a single polypeptide
+
+Translation:
+  Process by which mRNA is converted into a peptide chain for a protein creation
+
+Nucleotide:
+  Monomer making up a nucleic acid
+  Contains a sugar molecule, negative ion called phosphate, nucleobase
+  polymerization achieved through sugar bonding with next phosphate
+
+DNA:
+  Four of its nucleobases are: adenine, cytosine, guanine, thymine
+  A <-> T, C <-> G
+
+mRNA:
+  messenger RNA. created during RNA transcription
+  strand of RNA gets created from a template DNA strand
+  In RNA, uracil replaces thymine.
+
+primary structure:
+  order of bases on a strand of nucleic acid
+
+Nucleobases:
+  Differentiating component of nucleotides
+
+Amino acid:
+  monomer unit for proteins
+  same 20 amino acids occur in most species
+
+Nucliec Acid:
+  Polymer of nucleotides, constituting either RNA or DNA
+
+Protein Sequence:
+  String comprised of English alphabet less B,J,O,U,X,Z
+  Represents a peptide chain formed from amino acids
+
+Genome:
+  Collection of all of an organism's DNA taken from all of its chromosomes
+
+Genome Sequencing:
+  Determining the entire genome of an organism
+
+Gene:
+  Interval of DNA whose nucleotides are translated into polypeptide for protein creation
+
+Coding Regions:
+  Collection of a gene's exons
+
+Genus:
+  Low-level taxonomical rank, one step above species
+
+Endosymbiont:
+  An organims that lives in the body of another organism

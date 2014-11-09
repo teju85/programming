@@ -1,0 +1,11 @@
+(cat)dog;
+dog cat
+
+(dog,cat);
+dog cat
+
+((dog,cat),,mouse);
+dog mouse
+
+((a,b,),(c,d,,))e;
+a d

@@ -1,0 +1,5 @@
+yellow
+tooth
+Write a program to find the first non repeated character in a string.
+The first argument will be a text file containing strings. e.g. 
+stdout, the first non repeating character, one per line.
