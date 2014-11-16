@@ -50,24 +50,21 @@ score = [
 gapPenalty = -5
 
 def backtrack(mat, s, t, i, j):
-    if i <= 0 or j<= 0:
+    if i <= 0 or j <= 0:
         return ('', '')
-    if s[i-1] == t[j-1]:
+    maxi = max(mat[i][j-1], mat[i-1][j-1], mat[i-1][j])
+    if maxi == mat[i-1][j-1]:
         (s1, t1) = backtrack(mat, s, t, i-1, j-1)
         s1 += s[i-1]
         t1 += t[j-1]
-    elif mat[i][j-1] >= mat[i-1][j]  and  mat[i][j-1] >= mat[i-1][j-1]:
+    elif maxi == mat[i][j-1]:
         (s1, t1) = backtrack(mat, s, t, i, j-1)
         s1 += '-'
         t1 += t[j-1]
-    elif mat[i-1][j] >= mat[i-1][j-1]:
+    else:
         (s1, t1) = backtrack(mat, s, t, i-1, j)
         s1 += s[i-1]
         t1 += '-'
-    else:
-        (s1, t1) = backtrack(mat, s, t, i-1, j-1)
-        s1 += s[i-1]
-        t1 += t[j-1]
     return (s1, t1)
 
 def editDistance(s, t):
@@ -83,23 +80,20 @@ def editDistance(s, t):
         for j in range(1,lt):
             ta = t[j-1]
             scoreVal = score[syms[sa]][syms[ta]]
-            if sa == ta:
-                mat[i][j] = mat[i-1][j-1] + scoreVal
-            else:
-                a = mat[i-1][j] + gapPenalty
-                b = mat[i][j-1] + gapPenalty
-                c = mat[i-1][j-1] + scoreVal
-                mat[i][j] = max(a, b, c)
+            a = mat[i-1][j] + gapPenalty
+            b = mat[i][j-1] + gapPenalty
+            c = mat[i-1][j-1] + scoreVal
+            mat[i][j] = max(a, b, c)
     (s1, t1) = backtrack(mat, s, t, ls-1, lt-1)
     return (mat[-1][-1], s1, t1)
 
 if __name__ == '__main__':
-    sys.setrecursionlimit(20000)
     fp = open(sys.argv[1], 'r')
-    dna1 = stripLine(fp.readline())
-    dna2 = stripLine(fp.readline())
+    s = stripLine(fp.readline())
+    t = stripLine(fp.readline())
     fp.close()
-    (score, s1, t1) = editDistance(dna1, dna2)
+    sys.setrecursionlimit(10000)
+    (score, s1, t1) = editDistance(s, t)
     print score
     print s1
     print t1
