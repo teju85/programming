@@ -62,24 +62,21 @@ int countNumUnlocked(int numDoors, int mTimes) {
         doors[i] = false;
     }
     for(int i=1;i<mTimes;++i) {
-        for(int j=0;j<numDoors;j+=2) {
+        for(int j=1;j<numDoors;j+=2) {
             doors[j] = true;
         }
-        ++i;
-        if(i < mTimes) {
-            for(int j=0;j<numDoors;j+=3) {
-                doors[j] = !doors[j];
-            }
+        for(int j=2;j<numDoors;j+=3) {
+            doors[j] = !doors[j];
         }
     }
     doors[numDoors-1] = !doors[numDoors-1];
-    delete [] doors;
     int count = 0;
     for(int i=0;i<numDoors;++i) {
         if(!doors[i]) {
             ++count;
         }
     }
+    delete [] doors;
     return count;
 }
 
