@@ -26,13 +26,13 @@ int readVector(FILE* fp, vector<int>& arr) {
 }
 
 void ibs(vector<int>& vec, int numIter) {
-    int size = ((int) vec.size()) - 1;
+    int size = (int) vec.size();
     while(numIter > 0) {
-        for(int i=0;i<size;++i) {
-            if(vec[i] > vec[i+1]) {
-                int t = vec[i];
-                vec[i] = vec[i+1];
-                vec[i+1] = t;
+        for(int i=1;i<size;++i) {
+            if(vec[i-1] > vec[i]) {
+                int t = vec[i-1];
+                vec[i-1] = vec[i];
+                vec[i] = t;
             }
         }
         --numIter;
