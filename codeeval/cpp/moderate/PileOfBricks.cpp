@@ -6,6 +6,9 @@
 //
 
 #include <stdio.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
 #define ABS(a)  (a < 0)? -a : a
 
 struct Hole {
@@ -67,9 +70,8 @@ int main(int argc, char** argv) {
         return 2;
     }
     while(!feof(fp)) {
-        bool first = true;
+        vector<int> idxs;
         Hole hole;
-        int numPassed = 0;
         if(!hole.read(fp)) {
             break;
         }
@@ -81,18 +83,19 @@ int main(int argc, char** argv) {
             }
             fscanf(fp, ";");
             if(b.canPassThrough(hole)) {
-                ++numPassed;
-                if(first) {
-                    printf("%d", b.idx);
-                    first = false;
-                    continue;
-                }
-                printf(",%d", b.idx);
+                idxs.push_back(b.idx);
             }
         }
         fscanf(fp, "\n");
-        if(!numPassed) {
-            printf("-");
+        if(idxs.empty()) {
+            printf("-\n");
+            continue;
+        }
+        sort(idxs.begin(), idxs.end());
+        vector<int>::const_iterator itr = idxs.begin();
+        printf("%d", *itr);
+        for(++itr;itr!=idxs.end();++itr) {
+            printf(",%d", *itr);
         }
         printf("\n");
     }
