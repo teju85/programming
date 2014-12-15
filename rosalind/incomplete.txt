@@ -2,7 +2,6 @@
 7D.py
 LONG.py
 GASM.py
-5E.py
 6B.py
 GCON.py
 RSTR.py
