@@ -466,3 +466,16 @@ def getLogProb(gcProb):
     logProb['C'] = gcProb
     logProb['G'] = gcProb
     return logProb
+
+def printPermutation(perm):
+    s = '('
+    first = True
+    for p in perm:
+        if not first:
+            s += ' '
+        if p > 0:
+            s += '+'
+        s += str(p)
+        first = False
+    s += ')'
+    print s
