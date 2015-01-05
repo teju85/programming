@@ -14,59 +14,162 @@ using namespace std;
 #define MAX_CHARS 1024
 
 
-
-
-bool isCompatible(const string& bin, const string& seq, int binPos, int seqPos) {
-    if(binPos >= (int)bin.size()) {
-        return false;
+class State {
+public:
+    State(): z(), o() {}
+    ~State() {}
+    void printState() const {
+        printf("0=");
+        printVector(z);
+        printf(" 1=");
+        printVector(o);
     }
-    if(seqPos >= (int)seq.size()) {
-        return false;
+    void addZeroState(int id) {
+        z.push_back(id);
     }
-    if((bin[binPos] == '0') && (seq[seqPos] == 'B')) {
-        return false;
+    void addOneState(int id) {
+        o.push_back(id);
     }
-    return true;
-}
-
-bool hasToggleNext(const string& s, int pos) {
-    int len = (int)s.size();
-    if(pos >= len-1) {
-        return false;
-    }
-    return (s[pos] != s[pos+1]);
-}
-
-bool _can(const string& bin, const string& seq, int binPos, int seqPos) {
-    int binLen = (int)bin.size();
-    int seqLen = (int)seq.size();
-    if(!isCompatible(bin, seq, binPos, seqPos)) {
-        return false;
-    }
-    if((binPos == binLen-1) && (seqPos == seqLen-1)) {
-        return true;
-    }
-    if(hasToggleNext(seq, seqPos)) {
-        if(_can(bin, seq, binPos+1, seqPos+1)) {
-            return true;
+    void updateActives(set<int>& result, char c, int currId) const {
+        if(c == '0') {
+            updateActives(z, result, currId);
+        }
+        else if(c == '1') {
+            updateActives(o, result, currId);
         }
     }
-    else {
-        if(_can(bin, seq, binPos, seqPos+1)) {
-            return true;
+
+private:
+    void updateActives(const vector<int>& vec, set<int>& result, int currId) const {
+        if(vec.empty()) {
+            result.insert(currId);
+            return;
         }
-        if(_can(bin, seq, binPos+1, seqPos+1)) {
-            return true;
+        for(vector<int>::const_iterator itr=vec.begin();itr!=vec.end();++itr) {
+            result.insert(*itr);
         }
     }
-    return false;
-}
+    void printVector(const vector<int>& vec) const {
+        if(vec.empty()) {
+            printf("-");
+            return;
+        }
+        bool first = true;
+        for(vector<int>::const_iterator itr=vec.begin();itr!=vec.end();++itr) {
+            if(!first) {
+                printf(",");
+            }
+            printf("%d", *itr);
+            first = false;
+        }
+    }
+
+    vector<int> z, o;
+};
+
+class NFA {
+public:
+    NFA(const string& seq): states() {
+        states.push_back(new State);
+        string::const_iterator itr = seq.begin();
+        char prev = *itr;
+        for(++itr;itr!=seq.end();++itr) {
+            if(prev != *itr) {
+                addState(prev);
+            }
+            prev = *itr;
+        }
+        addState(prev, true);
+    }
+
+    ~NFA() {
+        for(vector<State*>::iterator itr=states.begin();itr!=states.end();++itr) {
+            delete *itr;
+        }
+        states.clear();
+    }
+
+    void printStates() const {
+        int id = 0;
+        for(vector<State*>::const_iterator itr=states.begin();itr!=states.end();++itr,++id) {
+            printf("State=%d: ", id);
+            (*itr)->printState();
+            printf("\n");
+        }
+    }
+
+    bool doesMatch(const string& bin) const {
+        set<int> active;
+        active.insert(0);
+        for(string::const_iterator itr=bin.begin();itr!=bin.end();++itr) {
+            //printf("Before: "); printActives(active);
+            active = findNextActive(active, *itr);
+            //printf("Ater: "); printActives(active);
+        }
+        int finalId = (int) states.size() - 2;
+        if(active.find(finalId) != active.end()) {
+            return true;
+        }
+        return false;
+    }
+
+private:
+    void printActives(const set<int>& active) const {
+        bool first = true;
+        for(set<int>::const_iterator itr=active.begin();itr!=active.end();++itr) {
+            printf("%d", *itr);
+            if(!first) {
+                printf(" ");
+            }
+            first = false;
+        }
+        printf("\n");
+    }
+
+    set<int> findNextActive(const set<int>& active, char c) const {
+        set<int> result;
+        for(set<int>::const_iterator itr=active.begin();itr!=active.end();++itr) {
+            const State* s = states[*itr];
+            s->updateActives(result, c, *itr);
+        }
+        return result;
+    }
+
+    void addState(char c, bool last=false) {
+        int id = (int) states.size();
+        State* prev = states.back();
+        states.push_back(new State);
+        if(c == 'B') {
+            prev->addOneState(id);
+            State* one = states.back();
+            one->addOneState(id);
+            if(last) {
+                one->addZeroState(id+1);
+            }
+        }
+        else if(c == 'A') {
+            prev->addZeroState(id);
+            prev->addOneState(id);
+            State* oneZero = states.back();
+            oneZero->addZeroState(id);
+            oneZero->addOneState(id);
+        }
+        else {
+            printf("ERROR: bad char found! '%c'\n", c);
+        }
+        if(last) {
+            states.push_back(new State);
+        }
+    }
+
+    vector<State*> states;
+};
+
 
 bool canTransform(const string& bin, const string& seq) {
-    if(bin.size() > seq.size()) {
-        return false;
-    }
-    return _can(bin, seq, 0, 0);
+    NFA n(seq);
+    //n.printStates();
+    return n.doesMatch(bin);
 }
 
 int main(int argc, char** argv) {
